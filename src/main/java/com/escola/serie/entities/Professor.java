@@ -1,5 +1,6 @@
-package entities;
+package com.escola.serie.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,17 +16,10 @@ public class Professor {
     private Date dataNascimento;
     private String disciplina;
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ProfessorTurma> professorTurmas = new ArrayList<>();
 
-    public List<ProfessorTurma> getProfessorTurmas() {
-        return professorTurmas;
-    }
-
-    public void setProfessorTurmas(List<ProfessorTurma> professorTurmas) {
-        this.professorTurmas = professorTurmas;
-    }
-
-    public Professor(){
+    public Professor() {
 
     }
 
@@ -68,4 +62,13 @@ public class Professor {
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
     }
+
+    public List<ProfessorTurma> getProfessorTurmas() {
+        return professorTurmas;
+    }
+
+    public void setProfessorTurmas(List<ProfessorTurma> professorTurmas) {
+        this.professorTurmas = professorTurmas;
+    }
 }
+
