@@ -1,0 +1,21 @@
+meta {
+  name: POST Turmas
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/turmas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nomeTurma": "9 ano 03"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

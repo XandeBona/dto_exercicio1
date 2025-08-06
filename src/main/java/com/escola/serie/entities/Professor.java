@@ -14,7 +14,6 @@ public class Professor {
     private Integer id;
     private String nome;
     private Date dataNascimento;
-    private String disciplina;
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ProfessorTurma> professorTurmas = new ArrayList<>();
@@ -23,11 +22,10 @@ public class Professor {
 
     }
 
-    public Professor(Integer id, String nome, Date dataNascimento, String disciplina, List<ProfessorTurma> professorTurmas) {
+    public Professor(Integer id, String nome, Date dataNascimento, List<ProfessorTurma> professorTurmas) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.disciplina = disciplina;
         this.professorTurmas = professorTurmas;
     }
 
@@ -53,14 +51,6 @@ public class Professor {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    public String getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
     }
 
     public List<ProfessorTurma> getProfessorTurmas() {

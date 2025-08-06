@@ -1,0 +1,22 @@
+meta {
+  name: POST Professor-Turma
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/professor-turmas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "idProfessor": 2,
+    "idTurma": 3
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,23 @@
+meta {
+  name: POST Alunos
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/alunos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Jorge",
+    "matricula": "2025A01",
+    "idTurma": 1
+  }
+}
+
+settings {
+  encodeUrl: true
+}

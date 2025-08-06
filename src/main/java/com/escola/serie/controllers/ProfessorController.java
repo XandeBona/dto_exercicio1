@@ -1,5 +1,7 @@
 package com.escola.serie.controllers;
 
+import com.escola.serie.dtos.ProfessorRequestDTO;
+import com.escola.serie.dtos.ProfessorResponseDTO;
 import com.escola.serie.entities.Professor;
 import com.escola.serie.repositories.ProfessorRepository;
 import org.springframework.web.bind.annotation.*;
@@ -21,30 +23,35 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public Professor criarProfessor(@RequestBody Professor professor) {
-        this.professorRepository.save(professor);
-        return professor;
+    public ProfessorResponseDTO adicionarProfessor(@RequestBody ProfessorRequestDTO request) {
+        Professor professor = new Professor();
+
+        professor.setNome(request.getNome());
+        professor.setDataNascimento(request.getDataNascimento());
+
+        professorRepository.save(professor);
+
+        return new ProfessorResponseDTO(professor);
     }
 
     @PutMapping("/{idProfessor}")
-    public Professor editarProfessor(@PathVariable Integer idProfessor, @RequestBody Professor professor) {
-        Professor editar = this.professorRepository.findById(idProfessor).get();
+    public ProfessorResponseDTO editarProfessor(@PathVariable Integer idProfessor, @RequestBody ProfessorRequestDTO request) {
+        Professor professor = professorRepository.findById(idProfessor).orElseThrow();
 
-        editar.setNome(professor.getNome());
-        editar.setDisciplina(professor.getDisciplina());
-        editar.setDataNascimento(professor.getDataNascimento());
+        professor.setNome(request.getNome());
+        professor.setDataNascimento(request.getDataNascimento());
 
-        this.professorRepository.save(editar);
+        professorRepository.save(professor);
 
-        return editar;
+        return new ProfessorResponseDTO(professor);
     }
 
     @DeleteMapping("/{idProfessor}")
-    public Professor removerProfessor(@PathVariable Integer idProfessor) {
-        Professor professor = this.professorRepository.findById(idProfessor).get();
+    public ProfessorResponseDTO removerProfessor(@PathVariable Integer idProfessor) {
+        Professor professor = professorRepository.findById(idProfessor).orElseThrow();
 
-        this.professorRepository.deleteById(idProfessor);
+        professorRepository.delete(professor);
 
-        return professor;
+        return new ProfessorResponseDTO(professor);
     }
 }
